@@ -26,6 +26,15 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, "public")));
 
 // Initialize Gemini
+console.log(
+    "API KEY LOADED:",
+    Boolean(process.env.GEMINI_API_KEY)
+);
+
+console.log(
+    "API KEY LENGTH:",
+    process.env.GEMINI_API_KEY?.length
+);
 const ai = new GoogleGenAI({
     apiKey: process.env.GEMINI_API_KEY
 });
@@ -122,9 +131,8 @@ app.post("/chat", async (req, res) => {
 });
 
 // Server port
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
-// Start server
 app.listen(PORT, () => {
-    console.log(`Server running at http://localhost:${PORT}`);
+    console.log(`Server running on port ${PORT}`);
 });
