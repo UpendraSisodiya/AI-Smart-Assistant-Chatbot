@@ -1,17 +1,19 @@
 const input = document.getElementById("user-input");
-
 const sendBtn = document.getElementById("send-btn");
-
 const chatBox = document.getElementById("chat-box");
 
 let messages = [];
+let isLoading = false;
+
+// SEND MESSAGE FUNCTION
 
 async function sendMessage() {
 
     const question = input.value.trim();
 
-    if (question === "") return;
+    if (question === "" || isLoading) return;
 
+    // Show user message
     addMessage(question, "user-message");
 
     messages.push({
@@ -19,10 +21,15 @@ async function sendMessage() {
         content: question
     });
 
+    // Clear input
     input.value = "";
 
+    // Loading state
+    isLoading = true;
     sendBtn.disabled = true;
+    input.disabled = true;
 
+    // Thinking message
     const loading = addMessage("Thinking...", "bot-message");
 
     try {
@@ -47,8 +54,10 @@ async function sendMessage() {
             throw new Error(data.error || "Request failed");
         }
 
+        // Show AI response
         loading.textContent = data.reply;
 
+        // Save conversation
         messages.push({
             role: "assistant",
             content: data.reply
@@ -58,19 +67,29 @@ async function sendMessage() {
 
     catch (error) {
 
-        loading.textContent = "Error: " + error.message;
+        loading.textContent = "Sorry! " + error.message;
+
+        console.error("Chat Error:", error);
 
     }
 
     finally {
 
-        sendBtn.disabled = false;
+        isLoading = false;
 
-        chatBox.scrollTop = chatBox.scrollHeight;
+        sendBtn.disabled = false;
+        input.disabled = false;
+
+        input.focus();
+
+        scrollToBottom();
 
     }
 
 }
+
+
+// ADD MESSAGE FUNCTION
 
 function addMessage(text, className) {
 
@@ -82,18 +101,40 @@ function addMessage(text, className) {
 
     chatBox.appendChild(message);
 
-    chatBox.scrollTop = chatBox.scrollHeight;
+    scrollToBottom();
 
     return message;
 
 }
 
+
+// AUTO SCROLL
+
+function scrollToBottom() {
+
+    chatBox.scrollTo({
+        top: chatBox.scrollHeight,
+        behavior: "smooth"
+    });
+
+}
+
+
+// SEND BUTTON CLICK
+
 sendBtn.addEventListener("click", sendMessage);
+
+
+// ENTER KEY
 
 input.addEventListener("keydown", function(event) {
 
     if (event.key === "Enter") {
+
+        event.preventDefault();
+
         sendMessage();
+
     }
 
 });
