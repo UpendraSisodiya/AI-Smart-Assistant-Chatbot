@@ -1,0 +1,309 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #f5ead9;
+    font-family: Arial, sans-serif;
+    min-height: 100vh;
+    min-height: 100dvh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 20px;
+    overflow: hidden;
+}
+
+/* MAIN CONTAINER */
+
+.container {
+    position: relative;
+
+    width: 100%;
+    max-width: 1280px;
+
+    height: 90vh;
+    height: 90dvh;
+
+    min-height: 0;
+
+    background: #ffffff;
+    padding: 145px 45px 25px;
+
+    border-radius: 25px;
+    box-shadow: 0 8px 20px rgba(75, 48, 37, 0.18);
+
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+/* HEADER */
+
+h1 {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 120px;
+
+    background: #5b3e35;
+    color: #fff5e8;
+
+    display: flex;
+    align-items: center;
+
+    padding-left: 155px;
+
+    font-family: Georgia, serif;
+    font-size: clamp(22px, 3vw, 38px);
+}
+
+/* ROBOT ICON */
+
+h1::before {
+    content: "🤖";
+
+    position: absolute;
+    left: 35px;
+
+    width: 85px;
+    height: 85px;
+
+    background: #d99b5b;
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 38px;
+}
+
+/* SUBTITLE */
+
+p {
+    display: none;
+}
+
+/* CHAT BOX */
+
+#chat-box {
+    flex: 1;
+    min-height: 0;
+
+    width: 100%;
+
+    overflow-y: auto;
+
+    padding: 15px 5px;
+
+    background: #ffffff;
+    border-radius: 12px;
+
+    margin-bottom: 15px;
+}
+
+/* MESSAGES */
+
+.bot-message,
+.user-message {
+    padding: clamp(14px, 2vw, 28px);
+
+    margin-bottom: 18px;
+
+    border-radius: 24px;
+
+    line-height: 1.5;
+
+    font-size: clamp(14px, 1.5vw, 21px);
+
+    max-width: 90%;
+
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+
+/* BOT MESSAGE */
+
+.bot-message {
+    background: #f5ead9;
+    border: 2px solid #e8d8bf;
+
+    color: #503b33;
+
+    margin-right: auto;
+    text-align: left;
+}
+
+/* USER MESSAGE */
+
+.user-message {
+    background: #5b3e35;
+
+    color: #fff5e8;
+
+    margin-left: auto;
+    text-align: left;
+}
+
+/* INPUT AREA */
+
+.input-area {
+    display: flex;
+    align-items: center;
+
+    gap: 15px;
+
+    width: 100%;
+    flex-shrink: 0;
+}
+
+/* INPUT */
+
+input {
+    flex: 1;
+    min-width: 0;
+
+    padding: 17px 25px;
+
+    border: 2px solid #d9c5a5;
+    border-radius: 50px;
+
+    outline: none;
+
+    font-size: clamp(14px, 1.4vw, 20px);
+
+    color: #50372f;
+    background: #ffffff;
+}
+
+input::placeholder {
+    color: #9b897b;
+}
+
+input:focus {
+    border-color: #a77950;
+}
+
+/* SEND BUTTON */
+
+button {
+    padding: 17px 38px;
+
+    border: none;
+    border-radius: 50px;
+
+    background: #95603f;
+    color: #ffffff;
+
+    font-size: clamp(14px, 1.4vw, 20px);
+
+    font-weight: bold;
+
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    background: #704632;
+}
+
+/* SCROLLBAR */
+
+#chat-box::-webkit-scrollbar {
+    width: 6px;
+}
+
+#chat-box::-webkit-scrollbar-thumb {
+    background: #d9c5a5;
+    border-radius: 10px;
+}
+
+/* TABLET */
+
+@media (max-width: 768px) {
+
+    body {
+        padding: 12px;
+    }
+
+    .container {
+        width: 100%;
+        height: 94vh;
+        height: 94dvh;
+
+        padding: 110px 20px 18px;
+
+        border-radius: 18px;
+    }
+
+    h1 {
+        height: 90px;
+        padding-left: 105px;
+        font-size: 23px;
+    }
+
+    h1::before {
+        left: 18px;
+        width: 65px;
+        height: 65px;
+        font-size: 30px;
+    }
+
+    #chat-box {
+        padding: 12px 0;
+    }
+
+    .bot-message,
+    .user-message {
+        max-width: 95%;
+        padding: 16px;
+        font-size: 15px;
+        border-radius: 18px;
+    }
+
+    .input-area {
+        gap: 8px;
+    }
+
+    input {
+        padding: 14px;
+        font-size: 14px;
+    }
+
+    button {
+        padding: 14px 20px;
+        font-size: 14px;
+    }
+}
+
+/* SMALL MOBILE */
+
+@media (max-width: 380px) {
+
+    h1 {
+        font-size: 19px;
+    }
+
+    .container {
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+
+    input {
+        padding: 12px 9px;
+        font-size: 12px;
+    }
+
+    button {
+        padding: 12px 14px;
+        font-size: 12px;
+    }
+}
